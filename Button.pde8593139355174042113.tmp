@@ -1,0 +1,44 @@
+class Button extends Controller{
+  String text;
+  ButtonState state = ButtonState.IDLE;
+  
+  Button(int id, String name) {
+    super(id, name);
+    text = name;
+  }
+  
+  void input() {
+    if (mouseX>pos.x && mouseX<pos.x+size.x && mouseY>pos.y && mouseY<pos.y+size.y) // if mouse over this button
+      if (mousePressed) { // is this button pressed
+        state = ButtonState.PRESSED;
+        
+      } else state = ButtonState.HOVER;
+    else state = ButtonState.IDLE;
+  }
+  
+  void display() {
+    noStroke();
+    switch (state) {
+      case IDLE: fill(backgroundColor); break;
+      case HOVER: fill(foregroundColor); break;
+      case PRESSED: fill(activeColor); break;
+    }
+    rect(pos.x, pos.y, size.x, size.y);
+    
+    fill(labelColor);
+    textAlign(CENTER,CENTER);
+    text(text, pos.x+size.x/2, pos.y+size.y/2);
+  }
+  
+  Button setPos(float x, float y) {
+    pos.x = x;
+    pos.y = y;
+    return this;
+  }
+}
+
+enum ButtonState {
+  IDLE,
+  HOVER,
+  PRESSED
+}
