@@ -6,7 +6,7 @@ class MenuScene extends Scene {
     wm = new WidgetManager(this);
     wm.setTextSize(15);
     
-    wm.addTextBox("ServerIpTextBox")
+    wm.addTextBox("ServerIpTextBox", true)
       .setLabel("Write server ip here")
       .setText("127.0.0.1")
       .setPos(50, 180)

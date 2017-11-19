@@ -30,9 +30,9 @@ class WidgetManager extends Widget {
     return newButton;
   }
   
-  TextBox addTextBox(String name) {
+  TextBox addTextBox(String name, boolean multpleLines) {
     lastId++;
-    TextBox newTextBox = new TextBox(lastId, name, scene);
+    TextBox newTextBox = new TextBox(lastId, name, scene, multpleLines);
     addAndInherit(newTextBox);
     return newTextBox;
   }

@@ -1,9 +1,11 @@
 class TextBox extends Widget {
   boolean focused = true;
   boolean wasPressed = false;
+  boolean multpleLines;
 
-  TextBox(int id, String name, Scene scene) {
+  TextBox(int id, String name, Scene scene, boolean multpleLines) {
     super(id, name, scene);
+    this.multpleLines = multpleLines;
   }
   
   void input() {
@@ -13,7 +15,6 @@ class TextBox extends Widget {
           focused = true;
       }
       else {
-        state = WidgetState.ACTIVE;
         if (mousePressed) focused = false;
       }
     }
@@ -26,7 +27,7 @@ class TextBox extends Widget {
       }
       else if (key == DELETE)
         valueText = "";
-      else {
+      else if (multpleLines || !(key == TAB || key == RETURN || key == ENTER)){
         valueText = valueText + key;
       }
       
@@ -46,8 +47,8 @@ class TextBox extends Widget {
     rect(pos.x, pos.y, size.x, size.y);
     
     textSize(textSize);
-    textAlign(LEFT, CENTER);
-    float padding = 3f;
+    textAlign(LEFT, TOP);
+    float padding = 5f;
     if (valueText.length() > 0) {
       fill(textColor);
       text(valueText, pos.x+padding, pos.y+padding, size.x-2*padding, size.y-2*padding);
