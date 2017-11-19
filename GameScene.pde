@@ -6,6 +6,7 @@ class GameScene extends Scene {
   PVector bPos;
   float bSize;
   int pScore1, pScore2;
+  boolean bump = false;
   
   GameScene() {
     pPos1 = new PVector();
@@ -53,10 +54,14 @@ class GameScene extends Scene {
   
   void update() {
     if (!c.active()) SceneManager.setScene("menu");
+    
+    if (bPos.y-10 <= 0 || bPos.y+10 >= height)
+      bump = true;
   }
   
   void render() {
-    background(0);
+    background(bump?255:0);
+    bump = false;
     
     fill(255);
     noStroke();

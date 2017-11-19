@@ -2,15 +2,20 @@ abstract class Widget {
   int id;
   String name;
   Scene scene;
+  boolean active = true;
+  WidgetState state = WidgetState.ACTIVE;
   
   PVector pos;
   PVector size;
-  String label;
+  String labelText;
+  String valueText = "";
   
   int textSize = 10;
   color backgroundColor = color(50);
   color foregroundColor = color(100);
   color activeColor = color(200);
+  color disableColor = color(25);
+  color hoverColor = color(150);
   color textColor = color(255);
   
   Widget(int id, String name, Scene scene) {
@@ -19,7 +24,7 @@ abstract class Widget {
     this.scene = scene;
     this.pos = new PVector(0, 0);
     this.size = new PVector(50, 50);
-    this.label = name;
+    this.labelText = name;
   }
   
   abstract void input();
@@ -38,7 +43,17 @@ abstract class Widget {
   }
   
   Widget setLabel(String newLabel) {
-    label = newLabel;
+    labelText = newLabel;
+    return this;
+  }
+  
+  Widget setText(String newText) {
+    valueText = newText;
+    return this;
+  }
+  
+  Widget setActive(boolean newValue) {
+    active = newValue;
     return this;
   }
 }
@@ -49,4 +64,11 @@ class Event {
   Event(Widget sender) {
     this.sender = sender;
   }
+}
+
+enum WidgetState {
+  ACTIVE,
+  DISABLED,
+  HOVER,
+  PRESSED
 }

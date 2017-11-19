@@ -30,6 +30,13 @@ class WidgetManager extends Widget {
     return newButton;
   }
   
+  TextBox addTextBox(String name) {
+    lastId++;
+    TextBox newTextBox = new TextBox(lastId, name, scene);
+    addAndInherit(newTextBox);
+    return newTextBox;
+  }
+  
   void addAndInherit(Widget widget) {
     widgets.add(widget);
     widget.textSize = textSize;
@@ -76,6 +83,16 @@ class WidgetManager extends Widget {
   
   Widget setActiveColor(color newColor) {
     activeColor = newColor;
+    return this;
+  }
+  
+  Widget setDisableColor(color newColor) {
+    disableColor = newColor;
+    return this;
+  }
+  
+  Widget setHoverColor(color newColor) {
+    hoverColor = newColor;
     return this;
   }
   

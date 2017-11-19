@@ -1,5 +1,4 @@
 class WaitScene extends Scene {
-  Button[] bs;
   WidgetManager wm;
   boolean p1IsReady;
   boolean p2IsReady;

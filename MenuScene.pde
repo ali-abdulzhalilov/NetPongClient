@@ -6,29 +6,27 @@ class MenuScene extends Scene {
     wm = new WidgetManager(this);
     wm.setTextSize(15);
     
-    wm.addButton("PlayButton")
-      .setPos(width/2-75, 180)
-      .setSize(150, 29)
-      .setLabel("PLAY");
+    wm.addTextBox("ServerIpTextBox")
+      .setLabel("Write server ip here")
+      .setText("127.0.0.1")
+      .setPos(50, 180)
+      .setSize(199, 29);
     
-    wm.addButton("QuitButton")
-      .setPos(width/2-75, 210)
-      .setSize(150, 29)
-      .setLabel("QUIT");
+    wm.addButton("PlayButton")
+      .setPos(250, 180)
+      .setSize(100, 29)
+      .setLabel("CONNECT");
   }
   
   void widgetEvent(Event e) {
     if (e.sender == wm.getByName("PlayButton")) {
-      c = connectToServer("127.0.0.1", 12345);
+      String serverIp = wm.getByName("ServerIpTextBox").valueText;
+      c = connectToServer(serverIp, 12345);
       if (c != null && c.active()) {
         SceneManager.setScene("wait");
       } else {
         println("can't connect to server");
       }
-    }
-    
-    if (e.sender == wm.getByName("QuitButton")) {
-      exit();
     }
   }
   

@@ -1,29 +1,32 @@
 class Button extends Widget{
   boolean wasPressed = false;
-  ButtonState state = ButtonState.IDLE;
   
   Button(int id, String name, Scene scene) {
     super(id, name, scene);
   }
   
   void input() {
-    if (mouseX>pos.x && mouseX<pos.x+size.x && mouseY>pos.y && mouseY<pos.y+size.y){ // if mouse over this button
-      if (mousePressed && !wasPressed) { // is this button pressed
-        state = ButtonState.PRESSED;
-        scene.widgetEvent(new Event(this));
-      } else state = ButtonState.HOVER;
-      
-      wasPressed = mousePressed;
+    if (active) {
+      if (mouseX>pos.x && mouseX<pos.x+size.x && mouseY>pos.y && mouseY<pos.y+size.y){ // if mouse over this button
+        if (mousePressed && !wasPressed) { // is this button pressed
+          state = WidgetState.PRESSED;
+          scene.widgetEvent(new Event(this));
+        } else state = WidgetState.HOVER;
+        
+        wasPressed = mousePressed;
+      }
+      else state = WidgetState.ACTIVE;
     }
-    else state = ButtonState.IDLE;
+    else state = WidgetState.DISABLED;
   }
   
   void display() {
     noStroke();
     switch (state) {
-      case IDLE: fill(backgroundColor); break;
-      case HOVER: fill(foregroundColor); break;
-      case PRESSED: fill(activeColor); break;
+      case ACTIVE: fill(backgroundColor); break; // TODO: fix inconvience here
+      case DISABLED: fill(disableColor); break;
+      case HOVER: fill(hoverColor); break;
+      case PRESSED: fill(activeColor); break; // and here
     }
     rect(pos.x, pos.y, size.x, size.y);
     
@@ -31,18 +34,6 @@ class Button extends Widget{
     textAlign(CENTER,CENTER);
     textSize(textSize);
     //text(label, pos.x+size.x/2, pos.y+size.y/2);
-    text(label, pos.x, pos.y, size.x, size.y);
+    text(labelText, pos.x, pos.y, size.x, size.y);
   }
-  
-  Button setPos(float x, float y) {
-    pos.x = x;
-    pos.y = y;
-    return this;
-  }
-}
-
-enum ButtonState {
-  IDLE,
-  HOVER,
-  PRESSED
 }
