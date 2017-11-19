@@ -5,6 +5,7 @@ class GameScene extends Scene {
   PVector pSize;
   PVector bPos;
   float bSize;
+  int pScore1, pScore2;
   
   GameScene() {
     pPos1 = new PVector();
@@ -31,13 +32,15 @@ class GameScene extends Scene {
       if (input.contains("\n")) {
         input = input.substring(0, input.indexOf("\n"));
         String[] data = split(input, ' ');
-        if (data.length >= 6) {
+        if (data.length >= 8) {
           pPos1.x = float(data[0]);
           pPos1.y = float(data[1]);
           pPos2.x = float(data[2]);
           pPos2.y = float(data[3]);
           bPos.x = float(data[4]);
           bPos.y = float(data[5]);
+          pScore1 = int(data[6]);
+          pScore2 = int(data[7]);
         }
         else if (data.length >= 3) {
           if (data[0].contains("WAIT")) {
@@ -60,5 +63,12 @@ class GameScene extends Scene {
     rect(pPos1.x, pPos1.y, pSize.x, pSize.y);
     rect(pPos2.x, pPos2.y, pSize.x, pSize.y);
     ellipse(bPos.x, bPos.y, bSize, bSize);
+    
+    fill(255);
+    textSize(30);
+    textAlign(RIGHT);
+    text(pScore1, width/2-20, 30);
+    textAlign(LEFT);
+    text(pScore2, width/2+20, 30);
   }
 }

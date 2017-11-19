@@ -10,14 +10,9 @@ class MenuScene extends Scene {
       .setPos(width/2-75, 180)
       .setSize(150, 29)
       .setLabel("PLAY");
-      
-    wm.addButton("OptionButton")
-      .setPos(width/2-75, 210)
-      .setSize(150, 29)
-      .setLabel("OPTIONS");
     
     wm.addButton("QuitButton")
-      .setPos(width/2-75, 240)
+      .setPos(width/2-75, 210)
       .setSize(150, 29)
       .setLabel("QUIT");
   }
