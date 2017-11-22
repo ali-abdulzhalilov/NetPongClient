@@ -10,7 +10,7 @@ class Button extends Widget{
       if (mouseX>pos.x && mouseX<pos.x+size.x && mouseY>pos.y && mouseY<pos.y+size.y){ // if mouse over this button
         if (mousePressed && !wasPressed) { // is this button pressed
           state = WidgetState.PRESSED;
-          scene.widgetEvent(new Event(this));
+          scene.widgetEvent(new Event(this, EventType.PRESS));
         } else state = WidgetState.HOVER;
         
         wasPressed = mousePressed;

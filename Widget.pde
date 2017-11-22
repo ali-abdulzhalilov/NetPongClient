@@ -58,17 +58,24 @@ abstract class Widget {
   }
 }
 
-class Event {
-  Widget sender;
-  
-  Event(Widget sender) {
-    this.sender = sender;
-  }
-}
-
 enum WidgetState {
   ACTIVE,
   DISABLED,
   HOVER,
   PRESSED
+}
+
+class Event {
+  Widget sender;
+  EventType type;
+  
+  Event(Widget sender, EventType type) {
+    this.sender = sender;
+    this.type = type;
+  }
+}
+
+enum EventType {
+  PRESS,
+  FOCUS
 }

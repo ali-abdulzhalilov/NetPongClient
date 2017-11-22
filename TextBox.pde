@@ -10,9 +10,11 @@ class TextBox extends Widget {
   
   void input() {
     if (active) {
-      if (mouseX>pos.x && mouseX<pos.x+size.x && mouseY>pos.y && mouseY<pos.y+size.y){
-        if (mousePressed) // is this button pressed
+      if (mouseX>pos.x && mouseX<pos.x+size.x && mouseY>pos.y && mouseY<pos.y+size.y) {
+        if (mousePressed) { 
           focused = true;
+          scene.widgetEvent(new Event(this, EventType.FOCUS));
+        }
       }
       else {
         if (mousePressed) focused = false;
@@ -30,7 +32,7 @@ class TextBox extends Widget {
       else if (multpleLines || !(key == TAB || key == RETURN || key == ENTER)){
         valueText = valueText + key;
       }
-      
+      scene.widgetEvent(new Event(this, EventType.PRESS));
     }
     else state = WidgetState.DISABLED;
     
